@@ -1,0 +1,5 @@
+hspan_env/
+venv/
+node_modules/
+*.pt
+*.pth
