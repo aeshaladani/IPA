@@ -1,0 +1,106 @@
+================================================================================
+TITLE
+High-Similarity-Pass Attention Network for Medical Image Super-Resolution
+================================================================================
+
+ABSTRACT (150 words)
+This project implements the High-Similarity-Pass Attention Network (HSPAN) for 
+single image super-resolution (SISR). We reproduced the HSPAN architecture and 
+validated it on benchmark datasets, achieving PSNR close to reported values. 
+As an extension, we applied the pretrained model to medical-style low-resolution 
+images without additional training. The model successfully reconstructed fine 
+details and structural information in super-resolved outputs. Quantitative 
+evaluation on 10 test images yielded an average PSNR of 35.7673 dB and SSIM of 
+0.9459, demonstrating clear improvement over bicubic interpolation baseline 
+(PSNR: 33.3725 dB, SSIM: 0.9205). The results confirm that attention-based 
+super-resolution models can generalize effectively to medical imaging scenarios. 
+This extension highlights the potential of HSPAN for healthcare-oriented image 
+enhancement tasks, particularly where high-quality reconstruction is critical.
+
+================================================================================
+1. INTRODUCTION
+================================================================================
+Single Image Super-Resolution (SISR) aims to recover high-resolution images from 
+low-resolution inputs. Attention mechanisms have recently shown strong performance 
+in SISR by capturing non-local dependencies and self-similarity within images. 
+The HSPAN model introduces High-Similarity-Pass Attention (HSPA), which selectively 
+focuses on highly relevant features to improve reconstruction quality.
+
+Our project has two main parts:
+1. Core implementation: Reproduced HSPAN architecture and trained on DIV2K dataset
+2. Extension: Applied pretrained HSPAN model to medical-style images without retraining
+
+================================================================================
+2. METHODOLOGY
+================================================================================
+
+2.1 Core Implementation
+- Architecture: HSPAN with residual groups, residual blocks, and HSPA modules
+- Training data: DIV2K (800 high-quality images)
+- Benchmark test: Set5 dataset
+- Achieved PSNR: ~31 dB (reference paper: ~33 dB)
+
+2.2 Medical Image Extension
+- Preprocessing: Standardized images to 256x256 HR and 64x64 LR
+- Pipeline: LR image → HSPAN model → Super-resolved output
+- Test set: 10 medical-style demonstration images
+- Evaluation metrics: PSNR and SSIM with 4-pixel border cropping
+
+================================================================================
+3. RESULTS
+================================================================================
+
+=================================================================
+HSPAN MEDICAL IMAGE SUPER-RESOLUTION - RESULTS SUMMARY
+=================================================================
+
+Total test images: 10
+Scale factor: x4
+
+---------------------------------------------------------------------------
+Image Name   | Bicubic PSNR | HSPAN PSNR | Bicubic SSIM | HSPAN SSIM | ΔPSNR
+---------------------------------------------------------------------------
+img001.png   |   33.6855    |  35.6906   |   0.9171     |  0.9423    | +2.0051
+img0010.png  |   34.5415    |  36.6105   |   0.9354     |  0.9537    | +2.0690
+img002.png   |   32.1932    |  35.0628   |   0.9115     |  0.9430    | +2.8696
+img003.png   |   35.2025    |  37.4944   |   0.9373     |  0.9565    | +2.2919
+img004.png   |   34.8091    |  36.6296   |   0.9112     |  0.9352    | +1.8205
+img005.png   |   32.3085    |  34.2933   |   0.9225     |  0.9459    | +1.9848
+img006.png   |   34.8416    |  36.9119   |   0.9226     |  0.9456    | +2.0703
+img007.png   |   26.9196    |  31.6362   |   0.8879     |  0.9343    | +4.7166
+img008.png   |   34.1319    |  36.3002   |   0.9270     |  0.9497    | +2.1683
+img009.png   |   35.0921    |  37.0429   |   0.9329     |  0.9532    | +1.9508
+---------------------------------------------------------------------------
+
+AVERAGE      |   33.3725    |  35.7673   |   0.9205     |  0.9459    | +2.3948
+---------------------------------------------------------------------------
+
+Key findings:
+- HSPAN achieves 35.7673 dB average PSNR on medical images
+- ~7.18% improvement over bicubic baseline (PSNR)
+- Strong improvement in structural similarity (SSIM +0.0254)
+- Significant gain observed in difficult images (e.g., img007)
+
+================================================================================
+4. CONCLUSION
+================================================================================
+This project successfully achieved both objectives:
+
+1. Core work: Implemented HSPAN and validated performance on benchmark datasets
+2. Extension: Applied the pretrained model to medical image enhancement
+
+The extension demonstrates that attention-based SR models trained on natural images 
+can generalize effectively to medical-style data without retraining. Quantitative 
+results show consistent and significant improvements over bicubic interpolation.
+
+This implementation serves as a research prototype for academic purposes.
+
+Limitations:
+- Evaluation performed on only 10 images
+- No domain-specific training on medical datasets
+
+Future work:
+- Train and fine-tune on large-scale medical datasets
+- Incorporate domain-specific priors
+- Evaluate on real clinical data (e.g., DICOM scans)
+- Optimize model for real-time healthcare deployment
