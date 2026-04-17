@@ -1,6 +1,6 @@
 """
 Compute and Compare Metrics for All Pipelines
-==============================================
+
 Evaluates three pipelines:
     1. Bicubic interpolation (baseline)
     2. HSPAN only
@@ -110,15 +110,12 @@ def print_comparison_table(bicubic_results, hspan_results, enhanced_results):
     # Get all image names
     all_images = sorted(set(bicubic_results.keys()) | set(hspan_results.keys()) | set(enhanced_results.keys()))
     
-    print("\n" + "=" * 140)
     print("COMPREHENSIVE PIPELINE COMPARISON")
-    print("=" * 140)
     print()
     
     # Header
     header = f"{'Image Name':<15} | {'Bicubic PSNR':>12} | {'HSPAN PSNR':>11} | {'Enhanced PSNR':>13} | {'Δ(H-B)':>8} | {'Δ(E-B)':>8} | {'Δ(E-H)':>8}"
     print(header)
-    print("-" * 140)
     
     bicubic_psnrs = []
     hspan_psnrs = []
@@ -144,8 +141,6 @@ def print_comparison_table(bicubic_results, hspan_results, enhanced_results):
         if not np.isnan(enhanced_psnr):
             enhanced_psnrs.append(enhanced_psnr)
     
-    print("-" * 140)
-    
     # Averages
     avg_bicubic = np.mean(bicubic_psnrs) if bicubic_psnrs else np.nan
     avg_hspan = np.mean(hspan_psnrs) if hspan_psnrs else np.nan
@@ -157,16 +152,12 @@ def print_comparison_table(bicubic_results, hspan_results, enhanced_results):
     
     print(f"{'AVERAGE':<15} | {avg_bicubic:12.4f} | {avg_hspan:11.4f} | {avg_enhanced:13.4f} | "
           f"{avg_delta_hspan:+8.4f} | {avg_delta_enhanced_bicubic:+8.4f} | {avg_delta_enhanced_hspan:+8.4f}")
-    print("=" * 140)
     
     # SSIM Table
-    print("\n" + "=" * 120)
-    print("SSIM COMPARISON")
-    print("=" * 120)
+    print("\nSSIM COMPARISON")
     
     header_ssim = f"{'Image Name':<15} | {'Bicubic SSIM':>12} | {'HSPAN SSIM':>11} | {'Enhanced SSIM':>13} | {'Δ(E-H)':>8}"
     print(header_ssim)
-    print("-" * 120)
     
     bicubic_ssims = []
     hspan_ssims = []
@@ -188,20 +179,15 @@ def print_comparison_table(bicubic_results, hspan_results, enhanced_results):
         if not np.isnan(enhanced_ssim):
             enhanced_ssims.append(enhanced_ssim)
     
-    print("-" * 120)
-    
     avg_bicubic_ssim = np.mean(bicubic_ssims) if bicubic_ssims else np.nan
     avg_hspan_ssim = np.mean(hspan_ssims) if hspan_ssims else np.nan
     avg_enhanced_ssim = np.mean(enhanced_ssims) if enhanced_ssims else np.nan
     avg_delta_ssim = avg_enhanced_ssim - avg_hspan_ssim if not np.isnan(avg_enhanced_ssim) and not np.isnan(avg_hspan_ssim) else np.nan
     
     print(f"{'AVERAGE':<15} | {avg_bicubic_ssim:12.4f} | {avg_hspan_ssim:11.4f} | {avg_enhanced_ssim:13.4f} | {avg_delta_ssim:+8.4f}")
-    print("=" * 120)
     
     # Summary
-    print("\n" + "=" * 80)
-    print("SUMMARY")
-    print("=" * 80)
+    print("\nSUMMARY")
     print(f"Images evaluated: {len(bicubic_psnrs)}")
     print()
     print(f"Average PSNR improvement (HSPAN over Bicubic):    {avg_delta_hspan:+.4f} dB")
@@ -209,7 +195,6 @@ def print_comparison_table(bicubic_results, hspan_results, enhanced_results):
     print(f"Average PSNR improvement (Enhanced over HSPAN):   {avg_delta_enhanced_hspan:+.4f} dB")
     print()
     print(f"Average SSIM improvement (Enhanced over HSPAN):   {avg_delta_ssim:+.4f}")
-    print("=" * 80)
     print()
     
     print("Legend:")

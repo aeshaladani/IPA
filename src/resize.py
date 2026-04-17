@@ -7,7 +7,7 @@ for file in os.listdir(folder):
     path = os.path.join(folder, file)
     img = cv2.imread(path)
 
-    # 🔥 FORCE VERY SMALL SIZE
+    #  FORCE VERY SMALL SIZE
     img = cv2.resize(img, (64, 64))
 
     cv2.imwrite(path, img)

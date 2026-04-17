@@ -1,6 +1,5 @@
 """
 Enhanced HSPAN Pipeline - HSPAN + Unsharp Mask
-===============================================
 Complete pipeline for medical image super-resolution with postprocessing.
 
 Pipeline stages:
@@ -85,7 +84,6 @@ def sr_with_hspan(lr_image, hspan_model, scale=4):
     Super-resolve an image using HSPAN.
     
     Parameters
-    ----------
     lr_image : PIL.Image
         Low resolution input image
     hspan_model : Model
@@ -94,7 +92,6 @@ def sr_with_hspan(lr_image, hspan_model, scale=4):
         Super-resolution scale factor
         
     Returns
-    -------
     PIL.Image
         Super-resolved image
     """
@@ -127,7 +124,6 @@ def run_pipeline(lr_dir, hr_dir, output_base_dir, model_path, scale=4,
     Run all three pipelines and save results.
     
     Parameters
-    ----------
     lr_dir : Path
         Directory containing LR images
     hr_dir : Path
@@ -175,15 +171,15 @@ def run_pipeline(lr_dir, hr_dir, output_base_dir, model_path, scale=4,
         # Load LR image
         lr = Image.open(lr_file).convert('RGB')
         
-        # ========== PIPELINE 1: Bicubic Baseline ==========
+        #PIPELINE 1: Bicubic Baseline
         sr_bicubic = bicubic_upscale(lr, scale=scale)
         sr_bicubic.save(output_dirs['bicubic'] / f"{stem}_x{scale}_SR.png")
         
-        # ========== PIPELINE 2: HSPAN Only ==========
+        #PIPELINE 2: HSPAN Only
         sr_hspan = sr_with_hspan(lr, hspan_model, scale=scale)
         sr_hspan.save(output_dirs['hspan'] / f"{stem}_x{scale}_SR.png")
         
-        # ========== PIPELINE 3: Enhanced (HSPAN + Unsharp) ==========
+        #PIPELINE 3: Enhanced (HSPAN + Unsharp)
         # Super-resolve with HSPAN
         sr_enhanced = sr_with_hspan(lr, hspan_model, scale=scale)
         

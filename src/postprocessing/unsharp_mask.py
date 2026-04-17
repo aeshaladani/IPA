@@ -1,6 +1,5 @@
 """
 Unsharp Masking for Edge Enhancement
-=====================================
 Based on: Gonzalez & Woods - Digital Image Processing, Chapter 3.6
           "Sharpening Spatial Filters"
 
@@ -27,7 +26,6 @@ def apply_unsharp_mask(image, amount=1.5, radius=1.0, threshold=0):
     Apply unsharp masking to sharpen image edges.
     
     Parameters
-    ----------
     image : PIL.Image or np.ndarray
         Input image (RGB or grayscale)
     amount : float
@@ -45,18 +43,15 @@ def apply_unsharp_mask(image, amount=1.5, radius=1.0, threshold=0):
         - Higher = only sharpen strong edges (reduces noise amplification)
         
     Returns
-    -------
     PIL.Image
         Sharpened image
         
     Notes
-    -----
     - For medical images, amount=1.5 and radius=1.0 provide good balance
     - Threshold > 0 prevents noise amplification in smooth regions
     - Works in RGB or grayscale
     
     References
-    ----------
     Gonzalez & Woods (2018), Section 3.6.2: Unsharp Masking and Highboost Filtering
     """
     
@@ -94,7 +89,6 @@ def apply_unsharp_mask_batch(images, amount=1.5, radius=1.0, threshold=0):
     Apply unsharp masking to a batch of images.
     
     Parameters
-    ----------
     images : list of PIL.Image
         List of input images
     amount : float
@@ -105,7 +99,6 @@ def apply_unsharp_mask_batch(images, amount=1.5, radius=1.0, threshold=0):
         Edge threshold
         
     Returns
-    -------
     list of PIL.Image
         List of sharpened images
     """
@@ -126,7 +119,7 @@ if __name__ == "__main__":
     if not img_path.exists():
         print(f"Error: Image not found: {img_path}")
         sys.exit(1)
-    
+
     # Parse optional parameters
     amount = float(sys.argv[2]) if len(sys.argv) > 2 else 1.5
     radius = float(sys.argv[3]) if len(sys.argv) > 3 else 1.0

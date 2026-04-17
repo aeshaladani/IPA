@@ -67,6 +67,5 @@ def augment(*args, hflip=True, rot=True):
         if rot90: img = img.transpose(1, 0, 2)
         
         return img
-
     return [_augment(a) for a in args]
 
