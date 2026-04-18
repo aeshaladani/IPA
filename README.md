@@ -1,3 +1,8 @@
+Video Links
+Phase 1 https://drive.google.com/file/d/1fTAus5pe6mUKoSQ-SF5Q1_5xNuRP4f93/view?usp=drive_link
+Phase 2 https://drive.google.com/file/d/1oxkLmKQRgORFxEARRYCDY9_VENQAagVV/view?usp=drive_link
+
+
 # High-Similarity-Pass Attention for Single Image Super-Resolution
 This project is for HSPAN introduced in the following paper "High-Similarity-Pass Attention for Single Image Super-Resolution", accepted by IEEE TIP.
 
@@ -50,6 +55,3 @@ For more informaiton, please refer to [EDSR(PyTorch)](https://github.com/thstkdg
     # Example X4 SR
     python main.py --dir_data ../../ --data_test Set5+Set14+B100+Urban100+Manga109 --n_GPUs 1 --rgb_range 1 --save_models --save_results --n_resgroups 10 --n_resblocks 4 --n_feats 192  --reduction 2 --topk 128  --res_scale 0.1 --model HSPAN --save HSPAN_x4_results --chop --data_range 1-800/1-5 --scale 4 --test_only --pre_train ../experiment/HSPAN_x4/model/HSPAN_x4.pt 
     ```
-   
-## Acknowledgements
-This work was supported in part by the National Nature Science Foundation of China under Grant 62073082, Grant 62173091; in part by the Taishan Scholar Program of Shandong Province;
